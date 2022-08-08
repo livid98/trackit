@@ -6,14 +6,18 @@ import logo from "./Assets/Group 8.png"
 export default function Login(){
  const [email,setEmail]  = useState('');
  const [password, setPassword] = useState('');
+ const [name, setName] = useState('');
+ const [image, setImage] = useState('');
  const navigate = useNavigate();
  function Enviarform(e){
  e.preventDefault();  
   const obj = {
     email,
     password,
+    name,
+    image,
   }  
-  const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', obj);
+  const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', obj);
   promise.then(res=>{console.log(res.data)
   navigate('/hoje');
 })
@@ -24,8 +28,10 @@ return (
 <form onSubmit={Enviarform}>
 <input type="email" placeholder="email" onChange={ (e) => setEmail(e.target.value)} value={email} required />
 <input type="password" placeholder="senha" onChange={ (e) => setPassword(e.target.value)} value={password} required />
-<button onClick={Enviarform}>Entrar</button>
-<Link to="/cadastro"><h1>Não tem uma conta? Cadastre-se!</h1></Link>
+<input type="text" placeholder="nome" onChange={ (e) => setName(e.target.value)} value={name} required />
+<input type="text" placeholder="foto" onChange={ (e) => setImage(e.target.value)} value={image} required />
+<button onClick={Enviarform}>Cadastrar</button>
+<Link to="/"><h1>Já tem uma conta? Faça login!</h1></Link>
 </form>
 </Container> 
 )  
